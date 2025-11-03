@@ -6,7 +6,7 @@ const Toggles_Btns = ({ toggleStatus, setToggleStatus }) => {
   return (
     <div>
       <Container>
-        <div className="text-right mb-[30px]">
+        <div className="text-center md:text-right mb-[30px]">
           {btns.map((btn,ind) => {
             //ind is use for index.
             return (
