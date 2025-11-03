@@ -2,30 +2,33 @@ import React, { use, useState } from "react";
 import Container from "./container";
 import Toggles_Btns from "./Toggles_Btns";
 import CountBox from "./CountBox";
+import Card from "./Card";
 
-const IssuesManagement = ({fetchPromise}) => {
-  const [toggleStatus,setToggleStatus]=useState("All");
-  const initialData= use(fetchPromise);
-  console.log(initialData)
+const IssuesManagement = ({ fetchPromise }) => {
+  const [toggleStatus, setToggleStatus] = useState("All");
+  const initialData = use(fetchPromise);
+  const [data,setData]=useState(initialData)
   return (
     <div>
-      <CountBox></CountBox>
-
+      <CountBox data={data}></CountBox>
 
       {/* toggle button  */}
-      <Toggles_Btns toggleStatus={toggleStatus} setToggleStatus={setToggleStatus}></Toggles_Btns>
+      <Toggles_Btns
+        toggleStatus={toggleStatus}
+        setToggleStatus={setToggleStatus}
+      ></Toggles_Btns>
 
       {/* cards */}
-      {
-        initialData.map(issue=>{
-            console.log(issue)
-            return <div className="shadow-md cursor-pointer rounded-md bg-slate-100">
-                <div>
-                    <img src={issue.userImg} className="w-[80px] h-[80px] rounded-full" alt="" />
-                </div>
-            </div>
-        })
-      }
+      <Container>
+      <div className="grid grid-cols-3 gap-4 mb-5">
+        {data.map((issue,ind) => {
+          console.log(issue);
+          return (
+            <Card key={ind} issue={issue}></Card>
+          );
+        })}
+      </div>
+      </Container>
     </div>
   );
 };
